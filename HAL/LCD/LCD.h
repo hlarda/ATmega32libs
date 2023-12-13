@@ -2,7 +2,6 @@
 #define LCD_H
 
 #include <util/delay.h>
-
 #include"DIO/DIO.h"
 #include"LCDconfig.h"
 
