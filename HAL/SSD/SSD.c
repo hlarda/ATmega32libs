@@ -1,14 +1,14 @@
 #include"SSD.h"
 int digitsArr[10][7]={{1,1,1,1,1,1,0},     /*0*/
-                   {0,1,1,0,0,0,0},     /*1*/
-                   {1,1,0,1,1,0,1},     /*2*/
-                   {1,1,1,1,0,0,1},     /*3*/
-                   {0,1,1,0,0,1,1},     /*4*/
-                   {1,0,1,1,0,1,1},     /*5*/
-                   {1,0,1,1,1,1,1},     /*6*/
-                   {1,1,1,0,0,0,0},     /*7*/
-                   {1,1,1,1,1,1,1},     /*8*/
-                   {1,1,1,1,0,1,1}};    /*9*/
+                      {0,1,1,0,0,0,0},     /*1*/
+                      {1,1,0,1,1,0,1},     /*2*/
+                      {1,1,1,1,0,0,1},     /*3*/
+                      {0,1,1,0,0,1,1},     /*4*/
+                      {1,0,1,1,0,1,1},     /*5*/
+                      {1,0,1,1,1,1,1},     /*6*/
+                      {1,1,1,0,0,0,0},     /*7*/
+                      {1,1,1,1,1,1,1},     /*8*/
+                      {1,1,1,1,0,1,1}};    /*9*/
 
 void SSDinit(SSD_t *SSD){
     for (int i = 0; i < 7; i++)
@@ -59,16 +59,16 @@ void SSD2digits(SSD_t *SSD, u8 _2digits) {
                 for (int i = 0; i < 7; i++) {
                     DIOsetPinLogic(SSD->SSDpins[i], digitsArr[leftDigit][i]);
                 }
-                DIOsetPinLogic(LEFT_DIGIT_EN, HIGH_PIN);
-                _delay_ms(1);
                 DIOsetPinLogic(LEFT_DIGIT_EN, LOW_PIN);
+                _delay_ms(5);
+                DIOsetPinLogic(LEFT_DIGIT_EN, HIGH_PIN);
 
                 for (int i = 0; i < 7; i++) {
                     DIOsetPinLogic(SSD->SSDpins[i], digitsArr[rightDigit][i]);
                 }
-                DIOsetPinLogic(RIGHT_DIGIT_EN, HIGH_PIN);
-                _delay_ms(1);
                 DIOsetPinLogic(RIGHT_DIGIT_EN, LOW_PIN);
+                _delay_ms(5);
+                DIOsetPinLogic(RIGHT_DIGIT_EN, HIGH_PIN);
             }
             break;
 
@@ -77,16 +77,16 @@ void SSD2digits(SSD_t *SSD, u8 _2digits) {
                 for (int i = 0; i < 7; i++) {
                     DIOsetPinLogic(SSD->SSDpins[i], !digitsArr[leftDigit][i]);
                 }
-                DIOsetPinLogic(LEFT_DIGIT_EN, LOW_PIN);
-                _delay_ms(5);
                 DIOsetPinLogic(LEFT_DIGIT_EN, HIGH_PIN);
+                _delay_ms(5);
+                DIOsetPinLogic(LEFT_DIGIT_EN, LOW_PIN);
 
                 for (int i = 0; i < 7; i++) {
                     DIOsetPinLogic(SSD->SSDpins[i], !digitsArr[rightDigit][i]);
                 }
-                DIOsetPinLogic(RIGHT_DIGIT_EN, LOW_PIN);
-                _delay_ms(5);
                 DIOsetPinLogic(RIGHT_DIGIT_EN, HIGH_PIN);
+                _delay_ms(5);
+                DIOsetPinLogic(RIGHT_DIGIT_EN, LOW_PIN);
             }
             break;
 
