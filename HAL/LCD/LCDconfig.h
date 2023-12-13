@@ -17,7 +17,6 @@
 /*
  * LCD_MODE OPTIONS :  [ _4_BIT_MODE , _8_BIT_MODE ]
  */
-#define LCD_MODE         _8_BIT_MODE
-
+#define LCD_MODE         _4_BIT_MODE
 
 #endif 
