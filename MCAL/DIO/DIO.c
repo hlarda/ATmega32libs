@@ -98,3 +98,28 @@ registerLogic_t DIOgetPortLogic (portX_t portX){
     }
     return portLogic;
 }
+void DIOsetPinPullUpResistor(portPin_t portPin,pullUpResState_t state){
+    u8      bit =portPin % 10;
+    portX_t port=portPin / 10;
+
+    switch (state){
+        case DISABLE:
+            switch (port){
+                case portA: CLR_BIT(PORTA,bit); break;
+                case portB: CLR_BIT(PORTB,bit); break;
+                case portC: CLR_BIT(PORTC,bit); break;
+                case portD: CLR_BIT(PORTD,bit); break;
+                default:                        break;
+            }
+        break;
+        case ENABLE:
+            switch (port){
+                case portA: SET_BIT(PORTA,bit); break;
+                case portB: SET_BIT(PORTB,bit); break;
+                case portC: SET_BIT(PORTC,bit); break;
+                case portD: SET_BIT(PORTD,bit); break;
+                default:                        break;
+            }
+        break;
+        }
+}

@@ -38,6 +38,11 @@ typedef enum{
     portD
 }portX_t;
 
+typedef enum{
+    DISABLE=0,
+    ENABLE
+}pullUpResState_t;
+
 void        DIOsetPinDirection(portPin_t portPin,pinDirection_t direction);
 void        DIOsetPinLogic    (portPin_t portPin,pinLogic_t logic);
 pinLogic_t  DIOgetPinLogic    (portPin_t portPin);
