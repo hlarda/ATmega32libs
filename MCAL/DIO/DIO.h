@@ -46,6 +46,7 @@ typedef enum{
 void        DIOsetPinDirection(portPin_t portPin,pinDirection_t direction);
 void        DIOsetPinLogic    (portPin_t portPin,pinLogic_t logic);
 pinLogic_t  DIOgetPinLogic    (portPin_t portPin);
+void   DIOsetPinPullUpResistor(portPin_t portPin,pullUpResState_t state);
 
 void            DIOsetPortDirection(portX_t portX,registerDirection_t direction);
 void            DIOsetPortLogic    (portX_t portX,registerLogic_t logic);
