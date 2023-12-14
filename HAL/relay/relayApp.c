@@ -1,4 +1,4 @@
-#include"DIO/DIO.h"
+#include<DIO/DIO.h>
 #include<util/delay.h>
 
 int main()
@@ -21,7 +21,6 @@ int main()
     DIOsetPinLogic(PC0,LOW_PIN);
     DIOsetPinLogic(PC1,LOW_PIN);
     _delay_ms(500);
-    
   }
   return 0;
 }
