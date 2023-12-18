@@ -40,7 +40,13 @@ void ExIntInit(ExtIntChannels_t INTX){
             #endif
         break;
         case INT2:
-            /* code */
+            #if     INT2_SENSE == FALLING_EDGE
+                    CLR_BIT(MCUCSR,MCUCSR_ISC2);
+            #elif   INT2_SENSE == RISING_EDGE
+                    SET_BIT(MCUCSR,MCUCSR_ISC2);
+            #else
+                #error "invalid sense control option"
+            #endif
         break;
         default:                break;
     }

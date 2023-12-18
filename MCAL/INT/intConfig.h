@@ -9,6 +9,6 @@
 #define INT0_SENSE      RISING_EDGE
 #define INT1_SENSE      LOW_LEVEL
 /*ONLY raising anf falling*/
-#define INT2_SENSE      RISING_EDGE
+#define INT2_SENSE      FALLING_EDGE
 
 #endif
