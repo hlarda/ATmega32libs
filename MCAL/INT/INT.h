@@ -1,7 +1,6 @@
 #ifndef INT_H
 #define INT_H
 
-#include <avr/interrupt.h>
 #include <bitmath.h>
 #include <stdtype.h>
 #include "intConfig.h"
