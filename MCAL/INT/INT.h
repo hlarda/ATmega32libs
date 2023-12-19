@@ -1,9 +1,10 @@
 #ifndef INT_H
 #define INT_H
 
-#include<bitmath.h>
-#include<stdtype.h>
-#include"intConfig.h"
+#include <avr/interrupt.h>
+#include <bitmath.h>
+#include <stdtype.h>
+#include "intConfig.h"
 
 typedef enum ExtIntChannels_t{
     INT0,
@@ -11,5 +12,7 @@ typedef enum ExtIntChannels_t{
     INT2
 }ExtIntChannels_t;
 
-void ExIntInit(ExtIntChannels_t INTX);
+void ExIntInit              (ExtIntChannels_t INTX);
+void ExIntInitSetCallback   (ExtIntChannels_t INTX,void(*exIntCallbackPtr)(void));
+
 #endif
