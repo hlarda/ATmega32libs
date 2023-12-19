@@ -64,6 +64,6 @@ void ExIntInitSetCallback(ExtIntChannels_t INTX,void(*exIntCallbackPtr)(void)){
         default:                                                 break;
         }
 }
-ISR(INT0_vect)  { exInt0Callback(); }
-ISR(INT1_vect)  { exInt1Callback(); }
-ISR(INT2_vect)  { exInt2Callback(); }
+ISR(INT0_vect)  { if (exInt0Callback != NULL) { exInt0Callback(); } }
+ISR(INT1_vect)  { if (exInt1Callback != NULL) { exInt0Callback(); } }
+ISR(INT2_vect)  { if (exInt2Callback != NULL) { exInt0Callback(); } }

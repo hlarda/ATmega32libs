@@ -20,4 +20,6 @@
 #define GIFR_INT1       7
 #define GIFR_INT2       5
 
+#define NULL                      '\0'
+
 #endif
