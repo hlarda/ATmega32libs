@@ -28,7 +28,12 @@
 #define ADCH            (*((volatile u8*)0x25))
 
 void ADCsetVoltReference(void);
-void ADCsetPrescaler(void);
-void ADCenable(void);
+void ADCsetPrescaler    (void);
+void ADCenable          (void);
+
+void ADCselectChannel               (ADCx_t ADCx);
+void ADCstartConversion             (void);
+void ADCwaitForConversionCompletion (void);
+u16 ADCmergeDataRegisters           (void);
 
 #endif
