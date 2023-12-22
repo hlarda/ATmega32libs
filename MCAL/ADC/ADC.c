@@ -11,7 +11,7 @@ u16 ADCread(ADCx_t ADCx){
     ADCselectChannel            (ADCx);
     ADCstartConversion              ();
     ADCwaitForConversionCompletion  ();
-    return ADCmergeDataRegisters    ();
+    return ADCL;
 }
 
 void ADCsetVoltReference(void){
@@ -53,56 +53,13 @@ void ADCenable(void){
     SET_BIT(ADCSRA,ADEN);
 }
 void ADCselectChannel(ADCx_t ADCx){
-    switch (ADCx){
-        case ADC0:
-            CLR_BIT(ADMUX,MUX0);
-            CLR_BIT(ADMUX,MUX1);
-            CLR_BIT(ADMUX,MUX2);
-            break;
-        case ADC1:
-            SET_BIT(ADMUX,MUX0);
-            CLR_BIT(ADMUX,MUX1);
-            CLR_BIT(ADMUX,MUX2);
-            break;
-        case ADC2:
-            CLR_BIT(ADMUX,MUX0);
-            SET_BIT(ADMUX,MUX1);
-            CLR_BIT(ADMUX,MUX2);
-            break;
-        case ADC3:
-            SET_BIT(ADMUX,MUX0);
-            SET_BIT(ADMUX,MUX1);
-            CLR_BIT(ADMUX,MUX2);
-            break;
-        case ADC4:
-            CLR_BIT(ADMUX,MUX0);
-            CLR_BIT(ADMUX,MUX1);
-            SET_BIT(ADMUX,MUX2);
-            break;
-        case ADC5:
-            SET_BIT(ADMUX,MUX0);
-            CLR_BIT(ADMUX,MUX1);
-            SET_BIT(ADMUX,MUX2);
-            break;
-        case ADC6:
-            CLR_BIT(ADMUX,MUX0);
-            SET_BIT(ADMUX,MUX1);
-            SET_BIT(ADMUX,MUX2);
-            break;
-        case ADC7:
-            SET_BIT(ADMUX,MUX0);
-            SET_BIT(ADMUX,MUX1);
-            SET_BIT(ADMUX,MUX2);
-            break;
-        default:          break;
-    }
+    ADMUX = (ADMUX & CLR_FIRST_3_BITS) | ADCx;
 }
 void ADCstartConversion(void){
     SET_BIT(ADCSRA,ADSC);
 }
 void ADCwaitForConversionCompletion(void){
-    while (GET_BIT(ADCSRA,ADIF));
-}
-u16 ADCmergeDataRegisters(void){
-    return ( ADCL | (u16)(ADCH << 8) );
+    while (!GET_BIT(ADCSRA,ADIF));
+    /*clr flag*/
+    SET_BIT(ADCSRA,ADIF);
 }

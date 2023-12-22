@@ -24,8 +24,12 @@
 #define ADSC            6
 #define ADEN            7
 
-#define ADCL            (*((volatile u8*)0x24))
-#define ADCH            (*((volatile u8*)0x25))
+//#define ADCL            (*((volatile u8*)0x24))
+//#define ADCH            (*((volatile u8*)0x25))
+
+#define ADCL            (*((volatile u16*)0x24))
+
+#define CLR_FIRST_3_BITS 0xF8
 
 void ADCsetVoltReference(void);
 void ADCsetPrescaler    (void);
@@ -34,6 +38,5 @@ void ADCenable          (void);
 void ADCselectChannel               (ADCx_t ADCx);
 void ADCstartConversion             (void);
 void ADCwaitForConversionCompletion (void);
-u16 ADCmergeDataRegisters           (void);
 
 #endif

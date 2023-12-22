@@ -16,6 +16,7 @@ typedef enum ADCprescaler_t{
     _64_,
     _128_
 }ADCprescaler_t;
-#define ADC_DIVISION_FACTOR           _128_
+/*frq should be [50,200k] in our case 8000000/64<200*/
+#define ADC_DIVISION_FACTOR           _64_
 
 #endif
