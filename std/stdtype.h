@@ -11,4 +11,7 @@ typedef  unsigned long int  u32;
 typedef  float              f32;
 typedef  double             f64;
 typedef  double long        f128;
+
+#define NULL                0
+
 #endif
