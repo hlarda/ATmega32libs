@@ -3,6 +3,7 @@
 
 #include<stdtype.h>
 #include<bitmath.h>
+#include<GINT/GINT.h>
 #include"timerConfig.h"
 
 typedef enum Timerx_t{

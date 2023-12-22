@@ -1,36 +1,35 @@
 #include"timer.h"
 #include"timerPrivate.h"
 
-u16 timer0_overflowTimes=0;
-u16 timer0_counter = 0;
 void (*timer0Callback)(void) = NULL;
 void (*timer1Callback)(void) = NULL;
 void (*timer2Callback)(void) = NULL;
 
+u32 timer0_overflowTimes=0;
+u32 timer0_remainedTicks=0;
+u16 timer0_counter = 0;
+
 void timerInit(Timerx_t TIMERX){
      timerSetOperationMode (TIMERX);
-     timerSetPrescalarValue(TIMERX);
      timerEnableInterrupt  (TIMERX);
+     globalInterruptEnable();
 }
 
 void timerSet_ms(Timerx_t TIMERX,u16 time_ms){
     u32 time_us=1000*time_ms;
+    u32 tickTime    = prescalerValue[TIMER0_PRESCALER] / SYSTEM_CLK;
+    u32 totalTicks  = time_us / tickTime;
 
     switch (TIMERX){
-    case TIMER0:{
-        u8  tickTime;
-        u16 overflowTime;
-        u8 preloadedValue;
-        tickTime     = prescalerValue[TIMER0_PRESCALER] / SYSTEM_CLK;
-        overflowTime = _8_BIT_TIMER_OVERFLOW_TICKS * tickTime;
-        timer0_overflowTimes= time_us / overflowTime;
-        preloadedValue = _8_BIT_TIMER_OVERFLOW_TICKS-(time_us % overflowTime);
-        if(preloadedValue){
+    case TIMER0:
+        timer0_overflowTimes = totalTicks / _8_BIT_TIMER_OVERFLOW_TICKS;
+        timer0_remainedTicks = totalTicks % _8_BIT_TIMER_OVERFLOW_TICKS;
+        if(timer0_remainedTicks){
             timer0_overflowTimes++;
-        }
-        TCNT0 = preloadedValue;  
-        break;
-    }    
+            TCNT0 = _8_BIT_TIMER_OVERFLOW_TICKS - timer0_remainedTicks;
+        }  
+        timerSetPrescalarValue(TIMERX);
+        break;  
     case TIMER1:
         break;
     case TIMER2:
@@ -52,9 +51,10 @@ void __vector_11(void) __attribute__((signal, used, externally_visible));
 void __vector_11(void) {
     if (timer0Callback != NULL) {
         timer0_counter++;
-        if (timer0_counter >= timer0_overflowTimes){
+        if (timer0_counter == timer0_overflowTimes){
             timer0Callback();
             timer0_counter=0;
+            TCNT0 = _8_BIT_TIMER_OVERFLOW_TICKS - timer0_remainedTicks;
         }
     }
 }
