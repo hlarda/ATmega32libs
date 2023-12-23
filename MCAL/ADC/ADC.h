@@ -15,6 +15,9 @@ typedef enum ADCx_t{
     ADC7
 }ADCx_t;
 
+extern volatile u16 ADC_ISR_value;
+
 void ADCinit(void);
+void ADCasyncStart(ADCx_t ADCx);
 u16  ADCread(ADCx_t ADCx);
 #endif
