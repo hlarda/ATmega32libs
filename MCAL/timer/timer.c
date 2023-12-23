@@ -86,16 +86,16 @@ void __vector_10(void) {
 void timerSetOperationMode(Timerx_t TIMERX){
     switch (TIMERX){
     case TIMER0:
-        #if TIMER0_MODE == NORMAL
+        #if TIMER0_OPERATION_MODE == NORMAL
 	        CLR_BIT(TCCR0 , WGM00);
 	        CLR_BIT(TCCR0 , WGM01);
-        #elif TIMER0_MODE == PHASE_CORRECT
+        #elif TIMER0_OPERATION_MODE == PHASE_CORRECT
         	SET_BIT(TCCR0 , WGM00);
         	CLR_BIT(TCCR0 , WGM01);
-        #elif TIMER0_MODE == CTC
+        #elif TIMER0_OPERATION_MODE == CTC
         	CLR_BIT(TCCR0 , WGM00);
         	SET_BIT(TCCR0 , WGM01);
-        #elif TIMER0_MODE == FAST_PWM
+        #elif TIMER0_OPERATION_MODE == FAST_PWM
         	SET_BIT(TCCR0 , WGM00);
         	SET_BIT(TCCR0 , WGM01);
         #endif  
