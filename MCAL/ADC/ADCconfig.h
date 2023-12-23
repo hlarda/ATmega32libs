@@ -1,22 +1,18 @@
 #ifndef ADC_CONFIG_H
 #define ADC_CONFIG_H
 
-typedef enum ADCvoltRefernce_t{
-    AREF,
-    AVCC_WITH_EXTERNAL_CAPACITOR_AT_AREF,
-    RESERVED,
-    _2_26V_WITH_EXTERNAL_CAPACITOR_AT_AREF
-}ADCvoltRefernce_t;
-#define ADC_VOLT_REF                  AREF
+#define AREF                                    0
+#define AVCC_WITH_EXTERNAL_CAPACITOR_AT_AREF    1
+#define RESERVED                                2
+#define _2_26V_WITH_EXTERNAL_CAPACITOR_AT_AREF  3
+#define ADC_VOLT_REF   AVCC_WITH_EXTERNAL_CAPACITOR_AT_AREF
 
-typedef enum ADCprescaler_t{
-    _8_,
-    _16_,
-    _32_,
-    _64_,
-    _128_
-}ADCprescaler_t;
 /*frq should be [50,200k] in our case 8000000/64<200*/
-#define ADC_DIVISION_FACTOR           _64_
+#define _8_ADC          0
+#define _16_ADC         1
+#define _32_ADC         2
+#define _64_ADC         3
+#define _128_ADC        4   
+#define ADC_DIVISION_FACTOR           _64_ADC
 
 #endif
