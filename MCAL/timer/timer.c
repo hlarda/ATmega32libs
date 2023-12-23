@@ -71,6 +71,18 @@ void __vector_11(void) {
     }
 }
 
+void __vector_10(void) __attribute__((signal, used, externally_visible));
+void __vector_10(void) {
+    if (timer0Callback != NULL) {
+        static u32 timer0_CM_counter = 0;
+        timer0_CM_counter++;
+        if (timer0_CM_counter == timer0_compareMatchTimes){
+            timer0Callback();
+            timer0_CM_counter=0;
+        }
+    }
+}
+
 void timerSetOperationMode(Timerx_t TIMERX){
     switch (TIMERX){
     case TIMER0:
