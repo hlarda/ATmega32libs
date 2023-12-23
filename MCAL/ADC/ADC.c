@@ -1,5 +1,6 @@
 #include"ADC.h"
 #include"ADCprivate.h"
+#include"ADCconfig.h"
 
 void ADCinit(void){
      ADCsetVoltReference ();
@@ -27,23 +28,23 @@ void ADCsetVoltReference(void){
     #endif
 }
 void ADCsetPrescaler(void){
-    #if     ADC_DIVISION_FACTOR == _8_
+    #if     ADC_DIVISION_FACTOR == _8_ADC
             SET_BIT(ADCSRA,ADPS0);
             SET_BIT(ADCSRA,ADPS1);
             CLR_BIT(ADCSRA,ADPS2);
-    #elif   ADC_DIVISION_FACTOR == _16_
+    #elif   ADC_DIVISION_FACTOR == _16_ADC
             CLR_BIT(ADCSRA,ADPS0);
             CLR_BIT(ADCSRA,ADPS1);
             SET_BIT(ADCSRA,ADPS2);
-    #elif   ADC_DIVISION_FACTOR == _32_
+    #elif   ADC_DIVISION_FACTOR == _32_ADC
             SET_BIT(ADCSRA,ADPS0);
             CLR_BIT(ADCSRA,ADPS1);
             SET_BIT(ADCSRA,ADPS2);
-    #elif   ADC_DIVISION_FACTOR == _64_
+    #elif   ADC_DIVISION_FACTOR == _64_ADC
             CLR_BIT(ADCSRA,ADPS0);
             SET_BIT(ADCSRA,ADPS1);
             SET_BIT(ADCSRA,ADPS2);
-    #elif   ADC_DIVISION_FACTOR == _128_
+    #elif   ADC_DIVISION_FACTOR == _128_ADC
             SET_BIT(ADCSRA,ADPS0);
             SET_BIT(ADCSRA,ADPS1);
             SET_BIT(ADCSRA,ADPS2);
