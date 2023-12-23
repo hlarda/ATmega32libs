@@ -122,7 +122,15 @@ void timerSetPrescalarValue(Timerx_t TIMERX){
 void timerEnableInterrupt(Timerx_t TIMERX){
     switch (TIMERX){
     case TIMER0:
-        SET_BIT(TIMSK,TOIE0);
+        #if   TIMER0_OPERATION_MODE == NORMAL
+	        SET_BIT(TIMSK,TOIE0);
+        #elif TIMER0_OPERATION_MODE == PHASE_CORRECT
+        	
+        #elif TIMER0_OPERATION_MODE == CTC
+        	SET_BIT(TIMSK,OCIE0);
+        #elif TIMER0_OPERATION_MODE == FAST_PWM
+        	
+        #endif  
         break;
     case TIMER1:
         break;
