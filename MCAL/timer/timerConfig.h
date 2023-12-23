@@ -1,13 +1,11 @@
 #ifndef TIMER_CONFIG_H
 #define TIMER_CONFIG_H
 
-typedef enum timerOprationMode_t{
-    NORMAL=0,
-    PHASE_CORRECT,
-    CTC,
-    FAST_PWM
-}timerOprationMode_t;
-#define TIMER0_OPERATION_MODE   NORMAL
+#define NORMAL          0
+#define PHASE_CORRECT   1    
+#define CTC             2    
+#define FAST_PWM        3
+#define TIMER0_OPERATION_MODE   CTC
 
 typedef enum timerPrescalar_t{
     NO_CLOCK_SOURCE=0,
