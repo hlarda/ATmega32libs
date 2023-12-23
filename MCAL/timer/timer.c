@@ -61,10 +61,11 @@ void timerSetCallback(Timerx_t TIMERX,void(*timerCallbackPtr)(void)){
 void __vector_11(void) __attribute__((signal, used, externally_visible));
 void __vector_11(void) {
     if (timer0Callback != NULL) {
-        timer0_counter++;
-        if (timer0_counter == timer0_overflowTimes){
+        static u32 timer0_OV_counter = 0;
+        timer0_OV_counter++;
+        if (timer0_OV_counter == timer0_overflowTimes){
             timer0Callback();
-            timer0_counter=0;
+            timer0_OV_counter=0;
             TCNT0 = _8_BIT_TIMER_OVERFLOW_TICKS - timer0_remainedTicks;
         }
     }
