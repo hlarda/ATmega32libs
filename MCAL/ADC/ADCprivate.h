@@ -34,6 +34,8 @@
 void ADCsetVoltReference(void);
 void ADCsetPrescaler    (void);
 void ADCenable          (void);
+void ADCdisable         (void);
+void ADCenablrInterrupt(void);
 
 void ADCselectChannel               (ADCx_t ADCx);
 void ADCstartConversion             (void);
