@@ -6,6 +6,8 @@
 #define CTC             2    
 #define FAST_PWM        3
 #define TIMER0_OPERATION_MODE   CTC
+#define TIMER0_CTC_TOP          _8_BIT_TIMER_OVERFLOW_TICKS-1
+
 
 typedef enum timerPrescalar_t{
     NO_CLOCK_SOURCE=0,

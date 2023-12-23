@@ -17,6 +17,7 @@ void timerInit(Timerx_t TIMERX){
 
 void timerSet_ms(Timerx_t TIMERX,u16 time_ms){
     u32 time_us=1000*time_ms;
+    u8 compareMatch = TIMER0_CTC_TOP;
     u32 tickTime    = prescalerValue[TIMER0_PRESCALER] / SYSTEM_CLK;
     u32 totalTicks  = time_us / tickTime;
 
@@ -31,7 +32,6 @@ void timerSet_ms(Timerx_t TIMERX,u16 time_ms){
             }  
             timerSetPrescalarValue(TIMERX);
         #elif TIMER0_OPERATION_MODE == CTC
-            u8 compareMatch = 255;
             while (totalTicks % compareMatch){
                 compareMatch --;
             }
