@@ -6,8 +6,9 @@ void (*timer1Callback)(void) = NULL;
 void (*timer2Callback)(void) = NULL;
 
 u32 timer0_overflowTimes=0;
+u32 timer0_compareMatchTimes=0;
+
 u32 timer0_remainedTicks=0;
-u16 timer0_counter = 0;
 
 void timerInit(Timerx_t TIMERX){
      timerSetOperationMode (TIMERX);
@@ -21,15 +22,26 @@ void timerSet_ms(Timerx_t TIMERX,u16 time_ms){
 
     switch (TIMERX){
     case TIMER0:
-        timer0_overflowTimes = totalTicks / _8_BIT_TIMER_OVERFLOW_TICKS;
-        timer0_remainedTicks = totalTicks % _8_BIT_TIMER_OVERFLOW_TICKS;
-        if(timer0_remainedTicks){
-            timer0_overflowTimes++;
-            TCNT0 = _8_BIT_TIMER_OVERFLOW_TICKS - timer0_remainedTicks;
-        }  
-        timerSetPrescalarValue(TIMERX);
+        #if TIMER0_OPERATION_MODE == NORMAL
+            timer0_overflowTimes = totalTicks / _8_BIT_TIMER_OVERFLOW_TICKS;
+            timer0_remainedTicks = totalTicks % _8_BIT_TIMER_OVERFLOW_TICKS;
+            if(timer0_remainedTicks){
+                timer0_overflowTimes++;
+                TCNT0 = _8_BIT_TIMER_OVERFLOW_TICKS - timer0_remainedTicks;
+            }  
+            timerSetPrescalarValue(TIMERX);
+        #elif TIMER0_OPERATION_MODE == CTC
+            u8 compareMatch = 255;
+            while (totalTicks % compareMatch){
+                compareMatch --;
+            }
+            OCR0 = compareMatch - 1;
+            timer0_compareMatchTimes = totalTicks / compareMatch;
+            timerSetPrescalarValue(TIMERX);
+        #endif
         break;  
     case TIMER1:
+
         break;
     case TIMER2:
         break;
