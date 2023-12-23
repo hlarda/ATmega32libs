@@ -12,7 +12,6 @@ u16 timer0_counter = 0;
 void timerInit(Timerx_t TIMERX){
      timerSetOperationMode (TIMERX);
      timerEnableInterrupt  (TIMERX);
-     globalInterruptEnable();
 }
 
 void timerSet_ms(Timerx_t TIMERX,u16 time_ms){
