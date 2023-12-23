@@ -3,6 +3,7 @@
 #include"ADCconfig.h"
 
 volatile u16 ADC_ISR_value = 0;
+u8 isConverting = 0 ;
 
 void ADCinit(void){
         ADCsetVoltReference ();
@@ -11,24 +12,29 @@ void ADCinit(void){
 }
 
 void ADCasyncStart(ADCx_t ADCx){
-        ADCsetVoltReference ();
-        ADCsetPrescaler     ();
-        ADCenable           ();
-        ADCenablrInterrupt  ();
-        ADCselectChannel    (ADCx);
-        ADCstartConversion  ();
+        if (!isConverting){
+                isConverting = TRUE;
+                ADCenablrInterrupt ();
+                ADCselectChannel   (ADCx);
+                ADCstartConversion ();
+        }
 }
 
 u16 ADCread(ADCx_t ADCx){
-    ADCselectChannel            (ADCx);
-    ADCstartConversion              ();
-    ADCwaitForConversionCompletion  ();
-    return ADCL;
+        if (!isConverting){
+                isConverting = TRUE;
+                ADCselectChannel    (ADCx);
+                ADCstartConversion  ();
+                ADCwaitForConversionCompletion  ();
+                return ADCL;
+                isConverting = FALSE;
+        }
 }
 
 void __vector_16(void) __attribute__((signal, used, externally_visible));
 void __vector_16(void) {
-    ADC_ISR_value=ADCL;
+        ADC_ISR_value=ADCL;
+        isConverting = FALSE;
 }
 
 void ADCsetVoltReference(void){

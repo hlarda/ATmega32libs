@@ -31,6 +31,9 @@
 
 #define CLR_FIRST_3_BITS 0xF8
 
+#define TRUE        1
+#define FALSE       0
+
 void ADCsetVoltReference(void);
 void ADCsetPrescaler    (void);
 void ADCenable          (void);
