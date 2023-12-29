@@ -6,7 +6,8 @@
 #include "LCD/LCD.h"
 #include"keyPad/keyPad.h"
 
-#define STACK_SIZE 16
+#define STACK_SIZE      16
+#define LCD_MAX_INDEX   16
 
 typedef struct {
     int top;
@@ -156,24 +157,24 @@ int MathChallenge(char* str) {
 }
 
 int main(void) {
-    u8 num=0;
-    char arr[16];
-    u8 counter=0;
-    LCDinit();
-    keyPadInit();
+    u8      keypadInput=0;
+    char    inputArray[LCD_MAX_INDEX];
+    u8      inputCounter=0;
+    LCDinit     ();
+    keyPadInit  ();
 
     while (1) {
-        num=keyPadRead();
-            if (num == '=' || counter == 16){
+        keypadInput=keyPadRead();
+            if (keypadInput == '=' || inputCounter == LCD_MAX_INDEX){
                 break;
             }
-            else if(num != KEYPAD_NOT_PRESSED){
-			    LCDwriteCharacter(num);
-                arr[counter++]=num;
+            else if(keypadInput != KEYPAD_NOT_PRESSED){
+			    LCDwriteCharacter(keypadInput);
+                inputArray[inputCounter++]=keypadInput;
 		    }
         }
         LCDgoTo(1,0);
-        int result = MathChallenge(arr);
+        int result = MathChallenge(inputArray);
         LCDwriteSignedNumber(result);
         _delay_ms(2000);
     return 0;
