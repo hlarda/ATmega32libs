@@ -8,15 +8,13 @@
 #define TIMER0_OPERATION_MODE   CTC
 #define TIMER0_CTC_TOP          _8_BIT_TIMER_OVERFLOW_TICKS-1
 
+#define    NO_CLOCK_SOURCE      0
+#define    NO_PRESCALAR         1
+#define    _8_PRESCALAR         2
+#define    _64_PRESCALAR        3
+#define    _256_PRESCALAR       4
+#define    _1024_PRESCALAR      5
 
-typedef enum timerPrescalar_t{
-    NO_CLOCK_SOURCE=0,
-    NO_PRESCALAR,
-    _8_PRESCALAR,
-    _64_PRESCALAR,
-    _256_PRESCALAR,
-    _1024_PRESCALAR
-}timerPrescalar_t;
 #define TIMER0_PRESCALER   _8_PRESCALAR
 
 #define SYSTEM_CLK   8
