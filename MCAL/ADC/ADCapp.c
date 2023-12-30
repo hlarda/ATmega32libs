@@ -21,9 +21,9 @@ int main() {
         u8 mappedValueSync0 = map(1023,0,255,0,adc0Data);
         DIOsetPortLogic(portC,mappedValueSync0);
 
-        u16 adc3Data=ADCread(ADC3);
-        u8 mappedValueSync3 = map(1023,0,255,0,adc3Data);
-        DIOsetPortLogic(portB,mappedValueSync3);
+        u16 adc7Data=ADCread(ADC7);
+        u8 mappedValueSync7 = map(1023,0,255,0,adc7Data);
+        DIOsetPortLogic(portD,mappedValueSync7);
 
         //ADCasyncStart(ADC3);
         //u8 mappedValueSync3 = map(1023,0,255,0,ADC_ISR_value);
