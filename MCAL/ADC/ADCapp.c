@@ -6,13 +6,8 @@
 u8 map(u32 INmax, u32 INmin, u32 OUTmax, u32 OUTmin, u32 IN);
 int main() {
     DIOsetPortDirection(portC,OUTPUT_REG);
-    DIOsetPortLogic(portC,HIGH_REG);
-
     DIOsetPortDirection(portD,OUTPUT_REG);
-    DIOsetPortLogic(portD,HIGH_REG);
-
     DIOsetPortDirection(portB,OUTPUT_REG);
-    DIOsetPortLogic(portB,HIGH_REG);
 
     DIOsetPinDirection(PA0,INPUT_PIN);
     DIOsetPinDirection(PA3,INPUT_PIN);
@@ -44,4 +39,3 @@ u8 map(u32 INmax, u32 INmin, u32 OUTmax, u32 OUTmin, u32 IN) {
     u8 OUT = ((((IN - INmin) * (OUTmax - OUTmin)) / (INmax - INmin)) + OUTmin);
     return OUT;
 }
-
