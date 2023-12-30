@@ -8,10 +8,10 @@ void UARTinit(void)
     enableReceiverAndTransmitter();
 }
 void UARTsend(u8 data){
-    /* Wait for empty transmit buffer */
-    while ( !GET_BIT(UCSRA,TXC) );
     /* Put data into buffer, sends the data */
     UDR = data;
+    /* Wait for empty transmit buffer */
+    while ( !GET_BIT(UCSRA,TXC) );
 }
 u8   UARTreceive(void){
     /* Wait for data to be received */
