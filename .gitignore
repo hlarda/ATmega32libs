@@ -1,1 +1,9 @@
-MCAL/DIO/DIOproteus/DIO.pdsprj.DESKTOP-53G5VIG.win 10.workspace
+*.trash
+
+.pio
+!**/.pio/build/*/firmware.hex
+
+*.pdsprj.*.workspace
+Project\ Backups/**/*.pdsprj
+
+*.pdsbak
