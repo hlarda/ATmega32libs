@@ -1,5 +1,9 @@
+*.trash
+
 .pio
 !**/.pio/build/*/firmware.hex
-*.trash
+
 *.pdsprj.*.workspace
+Project\ Backups/**/*.pdsprj
+
 *.pdsbak
